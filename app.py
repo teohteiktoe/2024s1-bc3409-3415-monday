@@ -1,9 +1,9 @@
 from flask import Flask,render_template,request
-import google.generativeai as palm
+import google.generativeai as genai
 
-api = "AIzaSyCaQcgKn95ZO6AR1t2PXzk9UydTkt4sWZQ"
-palm.configure(api_key=api)
-model = {"model": "models/chat-bison-001"}
+api = ""
+genai.configure(api_key=api)
+model = genai.GenerativeModel("gemini-1.5-flash")
 
 app = Flask(__name__)
 
@@ -18,8 +18,8 @@ def financial_FAQ():
 @app.route("/makersuite",methods=["GET","POST"])
 def makersuite():
     q = request.form.get("q")
-    r = palm.chat(messages=q, **model)
-    return(render_template("makersuite.html",r=r.last))
+    r = model.generate_content(q)
+    return(render_template("makersuite.html",r=r.text))
 
 if __name__ == "__main__":
     app.run()
