@@ -27,6 +27,10 @@ def makersuite():
 def sentiment_analysis():
     return(render_template("sentiment_analysis.html"))
 
+@app.route("/transfer_money",methods=["GET","POST"])
+def transfer_money():
+    return(render_template("transfer_money.html"))
+
 @app.route("/sentiment_analysis_result",methods=["GET","POST"])
 def sentiment_analysis_result():
     q = request.form.get("q")
