@@ -90,8 +90,7 @@
         const payee=document.getElementById("payee").value;
         const amount=document.getElementById("amount").value;
 
-
-
+        console.log(payer, payee, amount)
         await contract.methods.transfer(payer,payee,amount).send({from:accounts[0]})
     }
 

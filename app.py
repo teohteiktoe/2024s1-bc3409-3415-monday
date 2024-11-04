@@ -2,6 +2,8 @@ from flask import Flask,render_template,request
 import google.generativeai as genai
 import textblob
 import os
+import sqlite3
+import datetime
 
 api = os.getenv("MAKERSUITE")
 genai.configure(api_key=api)
@@ -12,6 +14,31 @@ app = Flask(__name__)
 @app.route("/",methods=["GET","POST"])
 def index():
     return(render_template("index.html"))
+
+@app.route("/main",methods=["GET","POST"])
+def main():
+    q = request.form.get("q")
+    currentDateTime = datetime.datetime.now()
+    conn = sqlite3.connect('userlog.db')
+    c = conn.cursor()
+    c.execute('INSERT INTO user (name,timestamp) VALUES(?,?)',(q,currentDateTime))
+    conn.commit()
+    c.close()
+    conn.close()
+    return(render_template("main.html"))
+
+@app.route("/userlog",methods=["GET","POST"])
+def userlog():
+    conn = sqlite3.connect('userlog.db')
+    c = conn.cursor()
+    c.execute('''select * from user''')
+    r=""
+    for row in c:
+        print(row)
+        r = r + str(row)
+    c.close()
+    conn.close()
+    return(render_template("userlog.html",r=r))
 
 @app.route("/financial_FAQ",methods=["GET","POST"])
 def financial_FAQ():

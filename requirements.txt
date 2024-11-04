@@ -2,3 +2,4 @@ flask
 gunicorn
 google-generativeai
 textblob
+pysqlite3

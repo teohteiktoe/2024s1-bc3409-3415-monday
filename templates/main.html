@@ -1,0 +1,22 @@
+<head>
+    <meta name="viewport" content="width=device-width,initial-scale=1.0">
+    <link rel="stylesheet" href="{{url_for('static',filename='styles.css')}}">
+</head>
+
+<body>
+<div class="container">
+<h2>Main Menu</h2>
+<form action="/sentiment_analysis" method="post">
+    <input type="submit" value="Sentiment Analysis">
+</form>
+<form action="/transfer_money" method="post">
+    <input type="submit" value="Transfer Money">
+</form>
+<form action="/financial_FAQ" method="post">
+    <input type="submit" value="Financial FAQ">
+</form>
+<form action="/userlog" method="post">
+    <input type="submit" value="User Log">
+</form>
+</div>
+</body>
